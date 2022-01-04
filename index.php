@@ -7,7 +7,11 @@
 	</head>
 	<main>
 		<body>
-			TEST
+			<div id="Title"></div>
+			<div id="Search_bar"></div>
+			<div id="Explanation"></div>
+			<div id="Brute_formula"></div>
+			<div id="Lewis"></div>
 		</body>
 	</main>
 </html>
