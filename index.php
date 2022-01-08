@@ -7,8 +7,12 @@
 	</head>
 	<main>
 		<body>
-			<div id="Title"></div>
-			<div id="Search_bar"></div>
+			<div id="Title">
+				SIWEL
+			</div>
+			<div id="Search_bar">
+				<input type="text" placeholder="H2O" />
+			</div>
 			<div id="Explanation"></div>
 			<div id="Brute_formula"></div>
 			<div id="Lewis"></div>
