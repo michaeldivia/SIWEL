@@ -11,7 +11,7 @@
 				SIWEL
 			</div>
 			<div id="Search_bar">
-				<input type="text" placeholder="H2O" />
+				<input type="text" placeholder="h2O" />
 			</div>
 			<div id="Explanation"></div>
 			<div id="Brute_formula"></div>
