@@ -1,4 +1,10 @@
-body{
+body
+{
 	background-color: #212121;
 	color:  WHITE;
+}
+
+.error
+{
+ 	border:2px solid red;
 }
