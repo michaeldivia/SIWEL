@@ -12,7 +12,7 @@
 				SIWEL
 			</div>
 			<div class="search_bar_div">
-				<input class="seach_bar" type="text" placeholder="h2O" />
+				<input id="seach_bar" type="text" placeholder="H2O" />
 			</div>
 			<div class="submit_button_div">
 				<button class="btn" onclick="StartConvert()">
