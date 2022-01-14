@@ -4,22 +4,33 @@
 	  <meta charset="UTF-8">
 	  <title>SIWEL</title>
 	  <link rel="stylesheet" href="./style.css">
+	  <script type="text/javascript" src="./script.js"></script>
 	</head>
 	<main>
 		<body>
-			<div id="Title">
+			<div class="title_div">
 				SIWEL
 			</div>
-			<div id="Search_bar">
-				<input type="text" placeholder="h2O" />
+			<div class="search_bar_div">
+				<input class="seach_bar" type="text" placeholder="h2O" />
 			</div>
-			<div id="Explanation"></div>
-			<div id="Brute_formula"></div>
-			<div id="Lewis"></div>
+			<div class="submit_button_div">
+				<button class="btn" onclick="StartConvert()">
+					Transformer
+				</button>
+			</div>
+			<div class="explanation_div">
+				
+			</div>
+			<div class="brute_formula_div">
+				
+			</div>
+			<div class="lewis_div">
+				
+			</div>
 		</body>
 	</main>
 </html>
-
 <?php
 	$var = 0;
 ?>
