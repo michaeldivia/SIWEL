@@ -26,7 +26,7 @@
 				
 			</div>
 			<div class="lewis_div">
-				
+				<p id="displayLewis"></p>
 			</div>
 		</body>
 	</main>

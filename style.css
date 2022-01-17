@@ -2,8 +2,22 @@ body
 {
 	background-color: #212121;
 	color:  WHITE;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+	height:max-content;
 }
-
+.lewis_div
+{
+	background-color: white;
+	color: black;
+	height: 100px;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+}
 .error
 {
  	border:2px solid red;
