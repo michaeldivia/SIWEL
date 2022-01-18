@@ -1,10 +1,7 @@
-var initial_value;
-var is_break;
-var nombre;
-
 function StartConvert(){
   tempLetter = null;
   tempNumber = null;
+  error = 0;
   newString = "";
   initial_value = "";
   displayString = "";
@@ -13,9 +10,8 @@ function StartConvert(){
   array.forEach((element, key, arr) => {
     table = Array.from(element);
     table.forEach( (element, key, arr) =>{
-      if(isCharacterACapitalLetter(element)){
+      if(isAuthorizedElement(element)){
         if(tempLetter != null){
-          //newString += tempLetter;
           if(tempNumber != null){
             a = parseInt(tempNumber);
             for(let i = 0; i < a; i++){
@@ -48,6 +44,11 @@ function StartConvert(){
             tempLetter=null;
           }
         }
+        else if(tempLetter == null){
+          document.getElementById("search_bar").className = "error";
+          alert("Un nombre est tout seul !");
+          error =1;
+        }
         else{
           tempNumber=element;
           if(Object.is(arr.length - 1, key)){
@@ -60,6 +61,11 @@ function StartConvert(){
           }
         }
       }
+      else{
+        document.getElementById("search_bar").className = "error";
+        alert("Ceci n'est pas un caractère autorisé");
+        error =1;
+      }
     });
     if(key == 0){
       displayString += newString;
@@ -71,34 +77,24 @@ function StartConvert(){
     tempNumber = null;
     tempLetter=null;
   });
-  document.getElementById("displayLewis").innerHTML = displayString;
+  if(error == 0){
+    if(displayString.length < 100){
+      document.getElementById("displayLewis").innerHTML = displayString;
+      document.getElementById('search_bar').classList.remove('error');
+    }
+    else{
+      document.getElementById("search_bar").className = "error";
+      alert("La formule est trop longue !");
+    }
+  }
 }
 
-function isCharacterACapitalLetter(char) {
-  return (/[A-Z]/).test(char)
+function isAuthorizedElement(char) {
+  return (/H|O|C/).test(char)
 }
 function isANumber(char) {
   return (/[0-9]/).test(char)
 }
-
-/**function StartConvert()
-{
-  initial_value = "";
-  is_break = "";
-  nombre = "";
-  document.getElementById("seach_bar").className = document.getElementById("seach_bar").className.replace(" error", "");
-
-  initial_value = document.getElementsByTagName("input")[0].value;
-
-  if (check_content(initial_value) == false)
-  {
-    document.getElementById("seach_bar").className = document.getElementById("seach_bar").className + " error";
-    return;
-  }
-
-  break_down(initial_value);
-}**/
-
 function check_content(brute)
 {
   if (!/^[COHcoh0-9\-]+$/.test(brute))
