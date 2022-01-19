@@ -1,12 +1,22 @@
 function StartConvert(){
+  initial_value = document.getElementsByTagName("input")[0].value;
+  if(check_content(initial_value) != false){
+    formula = transformFormula(initial_value);
+    if(formula != null){
+      displayFormula(formula);
+    }
+  }
+  else{
+    displayError("Votre formule n'est pas juste.");
+  }
+}
+function transformFormula(char){
   tempLetter = null;
   tempNumber = null;
   error = 0;
   newString = "";
-  initial_value = "";
   displayString = "";
-  initial_value = document.getElementsByTagName("input")[0].value;
-  array = initial_value.split("-");
+  array = char.split("-");
   array.forEach((element, key, arr) => {
     table = Array.from(element);
     table.forEach( (element, key, arr) =>{
@@ -45,8 +55,7 @@ function StartConvert(){
           }
         }
         else if(tempLetter == null){
-          document.getElementById("search_bar").className = "error";
-          alert("Un nombre est tout seul !");
+          displayError("Un nombre est tout seul !");
           error =1;
         }
         else{
@@ -61,11 +70,6 @@ function StartConvert(){
           }
         }
       }
-      else{
-        document.getElementById("search_bar").className = "error";
-        alert("Ceci n'est pas un caractère autorisé");
-        error =1;
-      }
     });
     if(key == 0){
       displayString += newString;
@@ -79,16 +83,24 @@ function StartConvert(){
   });
   if(error == 0){
     if(displayString.length < 100){
-      document.getElementById("displayLewis").innerHTML = displayString;
-      document.getElementById('search_bar').classList.remove('error');
+      return displayString;
     }
     else{
-      document.getElementById("search_bar").className = "error";
-      alert("La formule est trop longue !");
+      displayError("La formule est trop longue !");
     }
   }
+  else{
+    return null;
+  }
 }
-
+function displayFormula(char){
+  document.getElementById("displayLewis").innerHTML = char;
+  document.getElementById('search_bar').classList.remove('error');
+}
+function displayError(char){
+  alert(char);
+  document.getElementById("search_bar").className = "error";
+}
 function isAuthorizedElement(char) {
   return (/H|O|C/).test(char)
 }
@@ -97,13 +109,8 @@ function isANumber(char) {
 }
 function check_content(brute)
 {
-  if (!/^[COHcoh0-9\-]+$/.test(brute))
+  if (!/^[COH0-9\-]+$/.test(brute))
   {
     return false;
   }
-}
-
-function break_down(brute)
-{
-
 }
