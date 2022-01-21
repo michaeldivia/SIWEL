@@ -8,7 +8,7 @@ function StartConvert(){
   newString = "";
   initial_value = "";
   displayString = "";
-  initial_value = document.getElementsByTagName("input")[0].value;
+  initial_value = document.getElementById("atomsToDecompose").value;
   array = initial_value.split("-");
   array.forEach((element, key, arr) => {
     table = Array.from(element);
