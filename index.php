@@ -19,33 +19,43 @@
 	</head>
 	<main>
 		<body>
-			<div class="title_div">
-				SIWEL
-			</div>
-			<div class="search_bar_div">
-				<input id="seach_bar" type="text" placeholder="H2O" />
-			</div>
+			<div class="bodyContainer">
+				<div class="title_div">
+					<p>
+						<span class="titleS">S</span><span class="titleI">I</span><span class="titleW">W</span><span class="titleE">E</span><span class="titleL">L</span>
+					</p>
+				</div>
 
-			<div class="input-group">
-				<span class="input-group-addon" id="basic-addon1">@</span>
-				<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" id="atomsToDecompose">
-			</div>
+				<div class="explanation_div">
+					<p>
+						Lorem ipsum
+					</p>
+				</div>
 
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">Formule Semi-developpée</span>
+					<input type="text" placeholder="CH3-O2C" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose">
+				</div>
 
-			<div class="submit_button_div">
-				<button class="btn btn-default btnTransform" onclick="StartConvert()">
-					Transformer
-				</button>
-			</div>
-			<div class="explanation_div">
-				
-			</div>
-			<div class="brute_formula_div">
-				
-			</div>
-			<div class="lewis_div">
-				<p id="displayLewis"></p>
-			</div>
+				<div class="submit_button_div">
+					<button class="btn btn-default btnTransform" onclick="StartConvert()">
+						Transformer
+					</button>
+				</div>
+
+				<div class="brute_formula_div">
+					
+				</div>
+				<div class="lewis_div">
+					<p id="displayLewis"></p>
+				</div>
+				<footer id="footer">
+					<div class="inner">
+						<p>Crée par Michael Divia, Hugo Germano, Esteban Lopez et Henok Sese</p>
+						<p>©2022 ETML</p>
+					</div>
+				</footer>
+	  		</div>
 		</body>
 	</main>
 </html>

@@ -9,15 +9,33 @@ body
 	height:max-content;
 }
 
+#bodyContainer{
+	position: relative;
+	min-height: 100vh;
+}
+
+#footer{
+	color: white;
+	position: absolute;
+	bottom: 0;
+	height: 5rem;            /* Footer height */
+	margin-bottom: 5px;
+}
+
 /**********************Index page***********************/
 
 .title_div{
-	font-size: 100px;
-	color: red;
+	font-size: 150px;
+	color: rgba(32, 13, 121, 0.918);
+	text-shadow: 3px 3px 3px #ffffff;
 	margin-bottom: 25px;
 	font-family: 'Courier New', Courier, monospace;
 }
 
+.explanation_div{
+	color: white;
+	margin: 20px;
+}
 .btnTransform{
 	margin-top: 25px;
 	margin-bottom: 25px;
