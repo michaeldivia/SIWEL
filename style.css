@@ -1,12 +1,26 @@
 body
 {
-	background-color: #212121;
+	background-color: #212121 !important;
 	color:  WHITE;
 	display: flex;
   	justify-content: center;
   	align-items: center;
   	text-align: center;
 	height:max-content;
+}
+
+/**********************Index page***********************/
+
+.title_div{
+	font-size: 100px;
+	color: red;
+	margin-bottom: 25px;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.btnTransform{
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 .lewis_div
 {
@@ -17,6 +31,7 @@ body
   	justify-content: center;
   	align-items: center;
   	text-align: center;
+	  margin-top: 25px;
 }
 .error
 {
