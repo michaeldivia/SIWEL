@@ -20,6 +20,8 @@ body
 	bottom: 0;
 	height: 5rem;            /* Footer height */
 	margin-bottom: 5px;
+	width: 100%;
+	right: 0;
 }
 
 /**********************Index page***********************/
@@ -32,9 +34,15 @@ body
 	font-family: 'Courier New', Courier, monospace;
 }
 
-.explanation_div{
+.divResultats{
+	margin-top: 20px;
 	color: white;
-	margin: 20px;
+
+}
+
+#inputFormuleSemi{
+	width: 75%;
+	margin: auto;
 }
 .btnTransform{
 	margin-top: 25px;
