@@ -24,7 +24,7 @@ function StartConvert(){
 /*
 * Commentaire : décomposition de la formule entré par l'utilisateur en morceau plus utilisable
 * Auteur : Hugo Germano
-* @params : char ; string de la formule entré par l'utilisateur
+* @param : char string de la formule entré par l'utilisateur
 */
 function transformFormula(char){
   //déclaration des variables pour l'algorithme
@@ -97,7 +97,9 @@ function transformFormula(char){
         }
         //si la lettre n'est pas null, ajoute la lettre autant de fois que le nombre l'indique
         else{
+          //met en mémoire l'élement actuelle
           tempNumber=element;
+          //vérifie si c'est le dernier élement element du tableau et si oui, ajoute le nombre de fois l'élement selon indiqué par l'utilisateur
           if(Object.is(arr.length - 1, key)){
             a = parseInt(tempNumber);
             for(let i = 0; i < a; i++){
@@ -138,24 +140,63 @@ function transformFormula(char){
     return null;
   }
 }
+/**
+ * Commentaire : fonction d'affichage pour la formule
+ * Auteur: Hugo Germano
+ * @param char string à afficher 
+ */
 function displayFormula(char){
+  //affiche la formule à l'utilisateur
   document.getElementById("displayLewis").innerHTML = char;
+  //enleve la classe erreur à l'input
   document.getElementById('search_bar').classList.remove('error');
 }
+/**
+ * Commentaire : fonction pour alerter l'utilisateur d'une erreur
+ * Auteur : Hugo Germano
+ * @param char  
+ */
 function displayError(char){
   alert(char);
   document.getElementById("search_bar").className = "error";
 }
+/**
+ * Commentaire : fonction qui vérifie si l'élément est autorisé
+ * Auteur : Hugo Germano
+ * @param char string 
+ * @returns si l'élement est correct ou pas
+ */
 function isAuthorizedElement(char) {
   return (/H|O|C/).test(char)
 }
+/**
+ * Commentaire : fonction qui vérifie si c'est un nombre
+ * Auteur : Hugo Germano
+ * @param char string 
+ * @returns si c'est un nombre ou pas
+ */
 function isANumber(char) {
   return (/[0-9]/).test(char)
 }
+/**
+ * Commentaire : fonction qui vérifie si le string est correct ou pas
+ * Auteur : Michael Divià
+ * @param brute string de la formule à vérifier
+ * @returns si le string est correct ou pas
+ */
 function check_content(brute)
 {
   if (!/^[COH0-9\-]+$/.test(brute))
   {
     return false;
   }
+}
+/**
+ * Commentaire :
+ * Auteur :
+ * @param test
+ * @returns 
+ */
+function exemple (test){
+  return test;
 }
