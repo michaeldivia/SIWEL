@@ -4,7 +4,6 @@
 		<meta charset="UTF-8">
 		<title>SIWEL</title>
 		<link rel="stylesheet" href="./style.css">
-		<script type="text/javascript" src="./script.js"></script>
 
 		<!-- Bootstrap CDN !-->
 		
@@ -19,6 +18,7 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 		
+		<script type="text/javascript" src="./script.js"></script>
 
 	</head>
 	<main>
@@ -36,17 +36,14 @@
 
 				<div class="input-group" id="inputFormuleSemi">
 					<span class="input-group-addon" id="spanSemDeveloppee">Formule Semi-developpée</span>
-					<input type="text" placeholder="CH3-O2C" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" value="CH3-CO2" onkeypress="if(window.event.keyCode==13)StartConvert()">
+					<input type="text" placeholder="CH3-O2C" value="CH3-CO2H" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)StartConvert()">
 				</div>
 
 				<div class="submit_button_div">
-					<button class="btn btn-default btnTransform" onclick="StartConvert()">
+					<button class="btn btn-default btnTransform" onclick="conversionFormuleSemiDeveloppee()">
 						Transformer
 					</button>
 				</div>
-				<button id="testButton" onclick="test()">
-					Test
-				</button>
 
 				<div class="divResultats">
 					<p>
@@ -63,65 +60,9 @@
 						<p>©2022 ETML</p>
 					</div>
 				</footer>
-	  		</div>
+			</div>
 		</body>
 	</main>
-	<script>
-
-		var elementsPrincipaux = ["C","H","O"];
-
-		var formuleBruteSansNombres="";
-
-		var formuleBruteFinale="";
-
-		str_formuleSemi = document.getElementById("atomsToDecompose").value;
-
-		function test(){
-
-			array_formule = str_formuleSemi.split("-");
-
-			array_formule.forEach((element) => {
-
-				var numeroRepetitions = element.match(/\d+/g);
-
-				var letr =  element.match(/[COH]+/g);
-
-				for(var counter=0;counter < numeroRepetitions.length;counter++)
-				{
-					var normalLetters = letr[counter].slice(0,-1);
-
-					var letterToCopy = letr[counter].slice(-1);
-
-					var numberedFormula = letterToCopy.repeat(numeroRepetitions[counter]);
-					completedFormula = normalLetters+numberedFormula;
-					
-				}
-
-				formuleBruteSansNombres = formuleBruteSansNombres+=completedFormula;
-				
-			});
-
-			console.log(formuleBruteSansNombres);
-			formuleBrute();
-		}
-
-		function formuleBrute(){
-
-			elementsPrincipaux.forEach((element) => {
-
-				var re = new RegExp(element, 'g');
-
-				var count = (formuleBruteSansNombres.match(re) || []).length;
-
-				formuleBruteFinale+=element+count;
-			})
-
-			console.log(formuleBruteFinale);
-
-
-
-		}
-	</script>
 </html>
 <?php
 	$var = 0;
