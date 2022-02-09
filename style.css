@@ -1,12 +1,56 @@
 body
 {
-	background-color: #212121;
+	background-color: #212121 !important;
 	color:  WHITE;
 	display: flex;
   	justify-content: center;
   	align-items: center;
   	text-align: center;
 	height:max-content;
+}
+
+#bodyContainer{
+	position: relative;
+	min-height: 100vh;
+}
+
+.explanation_div{
+	color: white;
+}
+
+#footer{
+	color: white;
+	position: absolute;
+	bottom: 0;
+	height: 5rem;            /* Footer height */
+	margin-bottom: 5px;
+	width: 100%;
+	right: 0;
+}
+
+/**********************Index page***********************/
+
+.title_div{
+	font-size: 150px;
+	color: rgba(32, 13, 121, 0.918);
+	text-shadow: 3px 3px 3px #ffffff;
+	margin-bottom: 25px;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.divResultats{
+	margin-top: 20px;
+	color: white;
+
+}
+
+#inputFormuleSemi{
+	width: 75%;
+	margin: auto;
+}
+.btnTransform{
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 .lewis_div
 {
@@ -17,6 +61,7 @@ body
   	justify-content: center;
   	align-items: center;
   	text-align: center;
+	  margin-top: 25px;
 }
 .error
 {

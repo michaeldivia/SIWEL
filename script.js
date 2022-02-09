@@ -1,202 +1,125 @@
+
+//Variable avec les éléments principaux à tester
+var elementsPrincipaux = ["C","H","O"];
+
+//Variable Regex qui permet de vérifier l'inscription de l'utilisateur
+var regexTestElements = new RegExp("[COH-\d]");
+
+//Variable qui contiendra la formule brute sans les nombres (avec les lettres répétées)
+var formuleBruteSansNombres="";
+
+//Variable qui contiendra la formule brute finale
+var formuleBruteFinale="";
+
+
 /**
- * Commentaire : Fonction qui fait la conversion complète de la formule semi-developpé en formule de lewis
- * Auteur: Hugo Germano
+ * conversionFormuleSemiDeveloppee()
+ * Date : 04.02.2022
+ * Dernière modification : Esteban Lopez
+ * Permet d'enlever les - et répéter le nombre de fois un élément selon le nombre inscrit
  */
-function StartConvert(){
-  //récupère la formule que l'utilisateur a tapé dans l'input
-  initial_value = document.getElementsByTagName("input")[0].value;
-  //vérifie si la valeur que l'utilisateur a rentré correspond aux formules qu'on autorise
-  // Si c'est juste, transforme la formule pour qu'elle soit plus pratique à utiliser pour la suite
-  if(check_content(initial_value) != false){
-    //transforme la formule entré par l'utilisateur
-    formula = transformFormula(initial_value);
-    //si la formule a été transformé avec succès, affichage à l'utilisateur
-    if(formula != null){
-      //affichage de la formule
-      displayFormula(formula);
-    }
-  }
-  //Si c'est faux, alerte l'utilisateur que la formule n'est pas juste
-  else{
-    displayError("Votre formule n'est pas juste.");
-  }
-}
-/*
-* Commentaire : décomposition de la formule entré par l'utilisateur en morceau plus utilisable
-* Auteur : Hugo Germano
-* @param : char string de la formule entré par l'utilisateur
-*/
-function transformFormula(char){
-  //déclaration des variables pour l'algorithme
-  tempLetter = null;
-  tempNumber = null;
-  error = 0;
-  newString = "";
-  displayString = "";
-  //séparation des différentes petites formules au sein de la grande formule
-  array = char.split("-");
-  //foreach qui va parcourir chaque petite formule
-  array.forEach((element, key) => {
-    //création du tableau et foreach de chaque charactère du tableau
-    table = Array.from(element);
-    table.forEach( (element, key, arr) =>{
-      //vérifie si c'est un élément autorisé
-      if(isAuthorizedElement(element)){
-        //vérifie si une lettre est déjà en cours dans le programme
-        if(tempLetter != null){
-          // si un nombre à la dernière itération a été déclaré
-          if(tempNumber != null){
-            // transforme le string en int
-            a = parseInt(tempNumber);
-            //ajoute autant de fois l'élément à la grande formule qu'il y a de nombre
-            for(let i = 0; i < a; i++){
-              newString += tempLetter;
-            }
-            //remet les nombres à null
-            tempNumber = null;
-            //met le bon élément à la templetter
-            tempLetter=element;
-          }
-          
-          else{
-            newString += tempLetter;
-            tempLetter=element;
-          }
-        }
-        else{
-          tempLetter=element;
-        }
-        if(Object.is(arr.length - 1, key)){            
-          newString += element;
-        }
-      }
-      //vérifie si c'est un nombre
-      else if(isANumber(element)){
-        //vérifie si un nombre n'est pas déjà en cours
-        if(tempNumber != null){
-          //ajoute le nombre à celui de la précèdante itération
-          tempNumber += element;
-          //vérifie si on est à la dernière case du tableau
-          if(Object.is(arr.length - 1, key)){
-            //convertit le string en int
-            a = parseInt(tempNumber);
-            //ajoute le nombre de fois la la lettre de la dernière itération autant que fois que le nombre indique
-            for(let i = 0; i < a; i++){
-              newString += tempLetter;
-            }
-            //remets les valeurs à null
-            tempNumber = null;
-            tempLetter=null;
-          }
-        }
-        //vérifie si une lettre a été mise en mémoire à la dernière itération, si non, alerte l'utilisateur qu'une lettre est seule
-        else if(tempLetter == null){
-          displayError("Un nombre est tout seul !");
-          // erreur déclaré pour plus tard
-          error =1;
-        }
-        //si la lettre n'est pas null, ajoute la lettre autant de fois que le nombre l'indique
-        else{
-          //met en mémoire l'élement actuelle
-          tempNumber=element;
-          //vérifie si c'est le dernier élement element du tableau et si oui, ajoute le nombre de fois l'élement selon indiqué par l'utilisateur
-          if(Object.is(arr.length - 1, key)){
-            a = parseInt(tempNumber);
-            for(let i = 0; i < a; i++){
-              newString += tempLetter;
-            }
-            tempNumber = null;
-            tempLetter=null;
-          }
-        }
-      }
-    });
-    //si première petite formule, ajoute directement le string sans tiret à la grande formule transformé
-    if(key == 0){
-      displayString += newString;
-    }
-    //sinon ajoute la petite formule avec un tiret devant
-    else{
-      displayString += "-" +newString;
-    }
-    //réinitialise à "zéro" les différentes variables
-    newString ="";
-    tempNumber = null;
-    tempLetter=null;
-  });
-  //si il n'y a pas eu d'erreur, il continu
-  if(error == 0){
-    //si la formule est plus courte que 100, il l'affiche à l'utilisateur
-    if(displayString.length < 100){
-      return displayString;
-    }
-    // si plus grand que 100, prévient que l'utilisateur que la formule est trop longue
-    else{
-      displayError("La formule est trop longue !");
-    }
-  }
-  // si il y a une erreur, retourne null
-  else{
+function conversionFormuleSemiDeveloppee()
+{
+  //Permet de récupérer l'entrée de l'utilisateur (formule semi-developpée)
+  str_formuleSemi = document.getElementById("atomsToDecompose").value;
+
+
+  if(!testSiElementEstValide())
+  {
+    $("#atomsToDecompose").css("border","2px solid red");
+
     return null;
   }
-}
-/**
- * Commentaire : fonction d'affichage pour la formule
- * Auteur: Hugo Germano
- * @param char string à afficher 
- */
-function displayFormula(char){
-  //affiche la formule à l'utilisateur
-  document.getElementById("displayLewis").innerHTML = char;
-  //enleve la classe erreur à l'input
-  document.getElementById('search_bar').classList.remove('error');
-}
-/**
- * Commentaire : fonction pour alerter l'utilisateur d'une erreur
- * Auteur : Hugo Germano
- * @param char  
- */
-function displayError(char){
-  alert(char);
-  document.getElementById("search_bar").className = "error";
-}
-/**
- * Commentaire : fonction qui vérifie si l'élément est autorisé
- * Auteur : Hugo Germano
- * @param char string 
- * @returns si l'élement est correct ou pas
- */
-function isAuthorizedElement(char) {
-  return (/H|O|C/).test(char)
-}
-/**
- * Commentaire : fonction qui vérifie si c'est un nombre
- * Auteur : Hugo Germano
- * @param char string 
- * @returns si c'est un nombre ou pas
- */
-function isANumber(char) {
-  return (/[0-9]/).test(char)
-}
-/**
- * Commentaire : fonction qui vérifie si le string est correct ou pas
- * Auteur : Michael Divià
- * @param brute string de la formule à vérifier
- * @returns si le string est correct ou pas
- */
-function check_content(brute)
-{
-  if (!/^[COH0-9\-]+$/.test(brute))
+  else
   {
-    return false;
+    $("#atomsToDecompose").css("border","2px solid white");
   }
+
+  //Sépare la formule semi-developpée (par -)
+  array_formule = str_formuleSemi.split("-");
+
+  //Variable qui récupérera la formule au complet
+  var completedFormula = "";
+
+  //Parcourt chaque ensemble d'éléments séparé
+  array_formule.forEach((element) => {
+
+    //Récupère les lettres des atomes ainsi que les numéros
+    var arrayElements = element.split("");
+
+    arrayElements.forEach((element) => {
+      
+      if(element.match(/\d+/g))
+      {
+        //Récupère la lettre qui doît être répétée
+        var letterToRepeat = completedFormula.slice(-1);
+
+        //Récupère le nombre de fois que celle-ci doît être répétée
+        var numberedFormula = letterToRepeat.repeat(element-1);
+
+        //Rajoute l'élément répétée dans la formule
+        completedFormula+=numberedFormula;
+
+      }
+      else
+      {
+        //Rajoute l'élément dans la formule
+        completedFormula+=element;
+      }
+    })
+    
+  });
+
+  console.log(completedFormula);
+
+  //Exécute la fonction formuleBrute()
+  formuleBrute(completedFormula);
+
+  
+  //Réinitialisation des variables avec les formules
+  completedFormula="";
+  formuleBruteFinale="";
 }
+
 /**
- * Commentaire :
- * Auteur :
- * @param test
- * @returns 
+ * formuleBrute()
+ * Date : 04.02.2022
+ * Dernière modification : Esteban Lopez
+ * Permet de récupérer le nombre d'éléments ainsi que leur nombre d'occurences puis crée la formule brute
  */
-function exemple (test){
-  return test;
+function formuleBrute(completedFormula){
+
+  //Parcourt le tableau qui contient les éléments à tester
+  elementsPrincipaux.forEach((element) => {
+
+    //Création du Regex (Expression Regulière) qui contient l'élément 
+    var re = new RegExp(element, 'g');
+
+    //Compte combien de fois l'élément se trouve dans la formule semi-developpée
+    var count = (completedFormula.match(re) || []).length;
+
+    if(count!=0)
+    {
+      //Rajoute l'élément ainsi que le nombre d'apparitions dans la formule brute finale
+      formuleBruteFinale+=element+count;
+    }
+    
+
+  })
+
+  console.log(formuleBruteFinale);
+
+  //Affiche la formule brute sur la page
+  document.getElementById("spanFormuleBrute").innerHTML = formuleBruteFinale;
+}
+
+/**
+ * testSiElementEstValide()
+ * Date : 05.02.2022
+ * Dernière modification : Esteban Lopez
+ * Permet de vérifier que la formule inscrite par l'utilisateur respecte les normes
+ */
+function testSiElementEstValide()
+{
+  return regexTestElements.test(str_formuleSemi);
 }
