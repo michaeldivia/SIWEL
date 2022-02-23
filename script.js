@@ -3,7 +3,7 @@
 var elementsPrincipaux = ["C","H","O"];
 
 //Variable Regex qui permet de vérifier l'inscription de l'utilisateur
-var regexTestElements = new RegExp("[COH-\d]");
+var regexTestElements = /^[COH0-9\-]+$/;
 
 //Variable qui contiendra la formule brute sans les nombres (avec les lettres répétées)
 var formuleBruteSansNombres="";
@@ -24,15 +24,14 @@ function conversionFormuleSemiDeveloppee()
   str_formuleSemi = document.getElementById("atomsToDecompose").value;
 
 
-  if(!testSiElementEstValide())
+  if(!testSiElementEstValide() || !testDernierElement())
   {
-    $("#atomsToDecompose").css("border","2px solid red");
-
+    document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className + " has-error";
     return null;
   }
   else
   {
-    $("#atomsToDecompose").css("border","2px solid white");
+    document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className = "input-group";
   }
 
   //Sépare la formule semi-developpée (par -)
@@ -123,3 +122,28 @@ function testSiElementEstValide()
 {
   return regexTestElements.test(str_formuleSemi);
 }
+
+/**
+ * testDernierElement()
+ * Date : 23.02.2022
+ * Dernière modification : Michael Divia
+ * Permet de vérifier que la formule inscrite par l'utilisateur ce termine bien par une lettre ou un chiffre précédé d'une lettre
+ */
+ function testDernierElement()
+ {
+    if(str_formuleSemi.slice(-1) == "-")
+    {
+      return false;
+    }
+    else
+    {
+      if(isNaN(str_formuleSemi.slice(-1)))
+      {
+        return true;
+      }
+      else
+      {
+        return /^[COH]/.test(str_formuleSemi.slice(-2));  
+      }
+    }
+ }
