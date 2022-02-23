@@ -11,7 +11,6 @@ var formuleBruteSansNombres="";
 //Variable qui contiendra la formule brute finale
 var formuleBruteFinale="";
 
-
 /**
  * conversionFormuleSemiDeveloppee()
  * Date : 04.02.2022
@@ -76,20 +75,10 @@ function conversionFormuleSemiDeveloppee()
   //Exécute la fonction formuleBrute()
   formuleBrute(completedFormula);
 
-
-  document.location.href="formuleDeveloppee.php?formuleInscrite="+completedFormula;
-
   //Réinitialisation des variables avec les formules
   completedFormula="";
   formuleBruteFinale="";
 
-
-  /*
-  $.ajax({
-    url:"formuleDeveloppee.php",
-    method:"GET",
-    dataType="json",
-  });*/
 }
 
 /**
