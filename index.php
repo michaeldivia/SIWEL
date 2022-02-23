@@ -45,12 +45,14 @@
 				</div>
 
 				<div class="explanation_div">
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+					<p>Bienvenue chers amateurs de chimie. Vous n'arrivez pas à désiner votre formule de Lewis ? Vous êtes au bon endroit.</p>
+					<p>Entrez votre fomule semi-développée comprenant les atomes suivant: C, O et H.</p>
+					<p>SIWEL vous donnera la formule brute ainsi que la formule développée de Lewis.</p>
 				</div>
 
 				<div class="input-group" id="inputFormuleSemi">
 					<span class="input-group-addon" id="spanSemDeveloppee">Formule Semi-developpée</span>
-					<input type="text" placeholder="CH3-O2C" value="CH3-CO2H" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)conversionFormuleSemiDeveloppee()">
+					<input type="text" placeholder="CH3-O2C" value="" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)conversionFormuleSemiDeveloppee()">
 				</div>
 
 				<div class="submit_button_div">
