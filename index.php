@@ -45,8 +45,8 @@
 				</div>
 
 				<div class="explanation_div">
-					<p>Bienvenue chers amateurs de chimie. Vous n'arrivez pas à désiner votre formule de Lewis ? Vous êtes au bon endroit.</p>
-					<p>Entrez votre fomule semi-développée comprenant les atomes suivant: C, O et H.</p>
+					<p>Bienvenus chers amateurs de chimie. Vous n'arrivez pas à désirer votre formule de Lewis ? Vous êtes au bon endroit.</p>
+					<p>Entrez votre formule semi-développée comprenant les atomes suivants: C, O et H.</p>
 					<p>SIWEL vous donnera la formule brute ainsi que la formule développée de Lewis.</p>
 				</div>
 
