@@ -23,7 +23,7 @@ function conversionFormuleSemiDeveloppee()
   str_formuleSemi = document.getElementById("atomsToDecompose").value;
 
 
-  if(!testSiElementEstValide() || !testDernierElement())
+  if(!testSiElementEstValide() || !testDernierElement() || !testPremierElement())
   {
     document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className + " has-error";
     return null;
@@ -147,4 +147,15 @@ function testDernierElement()
       return /^[COH]/.test(str_formuleSemi.slice(-2));  
     }
   }
+}
+
+/**
+ * testPremietElement()
+ * Date : 23.02.2022
+ * Dernière modification : Michael Divia
+ * Permet de vérifier que le premier charactère est bien une lettre
+ */
+ function testPremierElement()
+{
+  return /^[COH]/.test(str_formuleSemi.slice(0));  
 }
