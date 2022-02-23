@@ -39,6 +39,7 @@ function conversionFormuleSemiDeveloppee()
 
   //Variable qui récupérera la formule au complet
   var completedFormula = "";
+  var formuleAvecTirets = "";
 
   //Parcourt chaque ensemble d'éléments séparé
   array_formule.forEach((element) => {
@@ -64,6 +65,7 @@ function conversionFormuleSemiDeveloppee()
       {
         //Rajoute l'élément dans la formule
         completedFormula+=element;
+        formuleAvecTirets+=element+"-";
       }
     })
     
@@ -74,10 +76,20 @@ function conversionFormuleSemiDeveloppee()
   //Exécute la fonction formuleBrute()
   formuleBrute(completedFormula);
 
-  
+
+  document.location.href="formuleDeveloppee.php?formuleInscrite="+completedFormula;
+
   //Réinitialisation des variables avec les formules
   completedFormula="";
   formuleBruteFinale="";
+
+
+  /*
+  $.ajax({
+    url:"formuleDeveloppee.php",
+    method:"GET",
+    dataType="json",
+  });*/
 }
 
 /**
