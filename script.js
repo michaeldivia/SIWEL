@@ -11,7 +11,6 @@ var formuleBruteSansNombres="";
 //Variable qui contiendra la formule brute finale
 var formuleBruteFinale="";
 
-
 /**
  * conversionFormuleSemiDeveloppee()
  * Date : 04.02.2022
@@ -39,6 +38,7 @@ function conversionFormuleSemiDeveloppee()
 
   //Variable qui récupérera la formule au complet
   var completedFormula = "";
+  var formuleAvecTirets = "";
 
   //Parcourt chaque ensemble d'éléments séparé
   array_formule.forEach((element) => {
@@ -64,6 +64,7 @@ function conversionFormuleSemiDeveloppee()
       {
         //Rajoute l'élément dans la formule
         completedFormula+=element;
+        formuleAvecTirets+=element+"-";
       }
     })
     
@@ -74,10 +75,10 @@ function conversionFormuleSemiDeveloppee()
   //Exécute la fonction formuleBrute()
   formuleBrute(completedFormula);
 
-  
   //Réinitialisation des variables avec les formules
   completedFormula="";
   formuleBruteFinale="";
+
 }
 
 /**
