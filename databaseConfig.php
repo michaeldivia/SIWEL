@@ -1,4 +1,5 @@
 <?php
+
     /**
     * debug_to_console()
     * Date : 23.02.2022

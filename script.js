@@ -10,6 +10,23 @@ var formuleBruteSansNombres="";
 
 //Variable qui contiendra la formule brute finale
 var formuleBruteFinale="";
+var cValue=4;
+var hValue=1;
+var oValue = 2;
+
+var counterEmplacement = 0;
+/*
+  [0] = Centre
+  [1] = Gauche
+  [2] = Haut
+  [3] = Bas
+  [4] = Droite
+*/
+let emplacements = ["","","","","","","","",""];
+arryTotalEmplacements = [];
+var regleOctet = 0;
+var valeurRestante = 0;
+var liaison = false;
 
 /**
  * conversionFormuleSemiDeveloppee()
@@ -43,8 +60,10 @@ function conversionFormuleSemiDeveloppee()
   //Parcourt chaque ensemble d'éléments séparé
   array_formule.forEach((element) => {
 
+    var formula = "";
     //Récupère les lettres des atomes ainsi que les numéros
     var arrayElements = element.split("");
+    arrayElements[arrayElements.length] = "-";
 
     arrayElements.forEach((element) => {
       
@@ -58,29 +77,200 @@ function conversionFormuleSemiDeveloppee()
 
         //Rajoute l'élément répétée dans la formule
         completedFormula+=numberedFormula;
+        formula+=numberedFormula;
 
+      }
+      else if(element == "-")
+      {
+        formuleAvecTirets+=formula+"-"; 
       }
       else
       {
         //Rajoute l'élément dans la formule
         completedFormula+=element;
-        formuleAvecTirets+=element+"-";
+        formula +=element;
+
       }
     })
-    
   });
 
-  console.log(completedFormula);
 
   //Exécute la fonction formuleBrute()
   formuleBrute(completedFormula);
+  formuleAvecTirets = formuleAvecTirets.slice(0,-1);
+  formuleLewis(formuleAvecTirets);
+
+
+  //document.location.href="formuleDeveloppee.php?formuleInscrite="+completedFormula;
 
   //Réinitialisation des variables avec les formules
   completedFormula="";
   formuleBruteFinale="";
+}
+
+
+function formuleLewis(formuleSemiDeveloppeeConvertie)
+{
+  
+
+  console.log(formuleSemiDeveloppeeConvertie);
+
+  if(formuleSemiDeveloppeeConvertie.includes("-"))
+  { 
+    array_formuleSemi = formuleSemiDeveloppeeConvertie.split("-");
+
+    
+    //Parcourt chaque ensemble d'éléments séparé
+    array_formuleSemi.forEach((groupeElementChimique) => 
+    {
+      
+      //Récupère les lettres des atomes ainsi que les numéros
+      var elementsAPlacer = groupeElementChimique.split("");
+
+      parcourirElements(elementsAPlacer);
+      
+    
+      arryTotalEmplacements.push(emplacements);
+
+      counterEmplacement = 0;
+      if(regleOctet>0)
+      {
+        valeurRestante = regleOctet;
+        regleOctet = 0;
+        liaison = true;
+        
+      }
+  });
+    
+  }
+  else
+  {
+    var elementsAPlacer = formuleSemiDeveloppeeConvertie.split("");
+
+    parcourirElements(elementsAPlacer);
+    arryTotalEmplacements.push(emplacements);
+  }
+
+  console.log(arryTotalEmplacements);
 
 }
 
+function parcourirElements(elementsFormule)
+{
+  emplacements = ["","","","","","","","",""];
+  
+
+  elementsFormule.forEach((elementChimique) => 
+  {
+    var valeurASoustraire = 0;
+    console.log(elementChimique);
+
+    if(counterEmplacement == 1 && liaison == true)
+    {
+      counterEmplacement+=2;
+      liaison = false;
+    }
+
+
+    switch(elementChimique)
+    {
+      case "C":
+        if(regleOctet!=0)
+        {
+          valeurASoustraire = cValue;
+        }
+        else
+        {
+          regleOctet = cValue;
+        }
+        break;
+
+      case "O":
+        if(regleOctet!=0)
+        {
+          valeurASoustraire = oValue;
+        }
+        else
+        {
+          regleOctet = oValue;
+        }
+
+        break;
+      
+      case "H":
+        if(regleOctet!=0)
+        {
+          valeurASoustraire = hValue;
+        }
+        else
+        {
+          regleOctet = hValue;
+        }
+        break;
+    }
+
+    if(valeurRestante != 0)
+    {
+      regleOctet = regleOctet-valeurRestante;
+      valeurRestante=0;
+    }
+
+
+
+    //C'est pas un C
+    if(valeurASoustraire != 0)
+    {
+      //Pas de double/triple relation
+      if(regleOctet-valeurASoustraire < 0)
+      {
+        var valeurElement = valeurASoustraire;
+
+        valeurASoustraire--;
+
+        if(regleOctet-valeurASoustraire < 0)
+        {
+          console.log("wtf");
+          
+          //Impossible normalement
+        }
+        else
+        {
+          regleOctet=valeurElement-regleOctet;
+          emplacements[counterEmplacement] = valeurASoustraire;
+          emplacements[counterEmplacement+1] = elementChimique;
+          arryTotalEmplacements.push(emplacements);
+          emplacements = ["","","","","","","","",""];
+          liaison = true;
+          counterEmplacement = 0;
+        }
+      }
+
+      
+        if(regleOctet-valeurASoustraire == 0 && counterEmplacement!= 0)
+        {
+          emplacements[emplacements.length-2] = valeurASoustraire; 
+          emplacements[emplacements.length-1] = elementChimique; 
+        }
+        else if(!liaison)
+        {
+          regleOctet = regleOctet-valeurASoustraire;
+          emplacements[counterEmplacement] = valeurASoustraire;
+          emplacements[counterEmplacement+1] = elementChimique;
+        }
+        counterEmplacement+=2;
+
+
+    }
+    //Donc c'est l'element au centre
+    else
+    {
+      emplacements[counterEmplacement] = elementChimique;
+      counterEmplacement++;
+    }
+
+    
+  });
+}
 /**
  * formuleBrute()
  * Date : 04.02.2022
@@ -98,17 +288,18 @@ function formuleBrute(completedFormula){
     //Compte combien de fois l'élément se trouve dans la formule semi-developpée
     var count = (completedFormula.match(re) || []).length;
 
-    if(count!=0)
+    if(count!=0 && count >1)
     {
       //Rajoute l'élément ainsi que le nombre d'apparitions dans la formule brute finale
       formuleBruteFinale+=element+count;
     }
-    
-
+    else if(count == 1)
+    {
+      formuleBruteFinale+=element;
+    }
   })
 
-  console.log(formuleBruteFinale);
-
+  
   //Affiche la formule brute sur la page
   document.getElementById("spanFormuleBrute").innerHTML = formuleBruteFinale;
 }
