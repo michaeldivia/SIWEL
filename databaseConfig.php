@@ -18,7 +18,7 @@
     $host = "localhost";
     $username = "siwel";
     $password = "JeNAimePasLaMTU1C2021$";
-    $dbname = "siwel";
+    $dbname = "SIWEL";
 
     //Créer la connexion à la Base de Donnée
     $conn = new mysqli($host, $username, $password, $dbname);
