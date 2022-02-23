@@ -130,21 +130,21 @@ function testSiElementEstValide()
  * Dernière modification : Michael Divia
  * Permet de vérifier que la formule inscrite par l'utilisateur ce termine bien par une lettre ou un chiffre précédé d'une lettre
  */
- function testDernierElement()
- {
-    if(str_formuleSemi.slice(-1) == "-")
+function testDernierElement()
+{
+  if(str_formuleSemi.slice(-1) == "-")
+  {
+    return false;
+  }
+  else
+  {
+    if(isNaN(str_formuleSemi.slice(-1)))
     {
-      return false;
+      return true;
     }
     else
     {
-      if(isNaN(str_formuleSemi.slice(-1)))
-      {
-        return true;
-      }
-      else
-      {
-        return /^[COH]/.test(str_formuleSemi.slice(-2));  
-      }
+      return /^[COH]/.test(str_formuleSemi.slice(-2));  
     }
- }
+  }
+}
