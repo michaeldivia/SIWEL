@@ -1,3 +1,6 @@
+<?php
+	include 'databaseConfig.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -17,7 +20,18 @@
 	
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-		
+
+		<script type='text/javascript'>
+			<?php
+
+				//Récupérer le tableau PHP en JS
+				echo "var array_elements = ". $js_elements . ";\n";
+
+				//Récupérer le tableau PHP en JS
+				echo "var array_fonction_organique = ". $js_fonction_organique . ";\n";
+			?>
+		</script>
+
 		<script type="text/javascript" src="./script.js"></script>
 
 	</head>
@@ -31,12 +45,14 @@
 				</div>
 
 				<div class="explanation_div">
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+					<p>Bienvenus chers amateurs de chimie. Vous n'arrivez pas à désirer votre formule de Lewis ? Vous êtes au bon endroit.</p>
+					<p>Entrez votre formule semi-développée comprenant les atomes suivants: C, O et H.</p>
+					<p>SIWEL vous donnera la formule brute ainsi que la formule développée de Lewis.</p>
 				</div>
 
 				<div class="input-group" id="inputFormuleSemi">
 					<span class="input-group-addon" id="spanSemDeveloppee">Formule Semi-developpée</span>
-					<input type="text" placeholder="CH3-O2C" value="CH3-CO2H" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)conversionFormuleSemiDeveloppee()">
+					<input type="text" placeholder="CH3-O2C" value="" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)conversionFormuleSemiDeveloppee()">
 				</div>
 
 				<div class="submit_button_div">
@@ -64,6 +80,3 @@
 		</body>
 	</main>
 </html>
-<?php
-	$var = 0;
-?>

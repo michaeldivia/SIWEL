@@ -9,10 +9,9 @@ var formuleBruteSansNombres="";
 
 //Variable qui contiendra la formule brute finale
 var formuleBruteFinale="";
-
-var CValue=4;
-var HValue=1;
-var OValue = 2;
+var cValue=4;
+var hValue=1;
+var oValue = 2;
 
 var counterEmplacement = 0;
 
@@ -50,7 +49,7 @@ function conversionFormuleSemiDeveloppee()
   str_formuleSemi = document.getElementById("atomsToDecompose").value;
 
 
-  if(!testSiElementEstValide() || !testDernierElement())
+  if(!testSiElementEstValide() || !testDernierElement() || !testPremierElement())
   {
     document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className + " has-error";
     return null;
@@ -66,7 +65,6 @@ function conversionFormuleSemiDeveloppee()
   //Variable qui récupérera la formule au complet
   var completedFormula = "";
   var formuleAvecTirets = "";
-  var counterElement = 0;
 
   //Parcourt chaque ensemble d'éléments séparé
   array_formule.forEach((element) => {
@@ -354,11 +352,11 @@ function nombreCelibatairesElement(elementChimique)
   switch(elementChimique)
   {
     case "O":
-      return 2;
+      return oValue;
     case "C":
-      return 4;
+      return ccValue;
     case "H":
-      return 1;
+      return hValue;
   }
 }
 
@@ -412,21 +410,32 @@ function testSiElementEstValide()
  * Dernière modification : Michael Divia
  * Permet de vérifier que la formule inscrite par l'utilisateur ce termine bien par une lettre ou un chiffre précédé d'une lettre
  */
- function testDernierElement()
- {
-    if(str_formuleSemi.slice(-1) == "-")
+function testDernierElement()
+{
+  if(str_formuleSemi.slice(-1) == "-")
+  {
+    return false;
+  }
+  else
+  {
+    if(isNaN(str_formuleSemi.slice(-1)))
     {
-      return false;
+      return true;
     }
     else
     {
-      if(isNaN(str_formuleSemi.slice(-1)))
-      {
-        return true;
-      }
-      else
-      {
-        return /^[COH]/.test(str_formuleSemi.slice(-2));  
-      }
+      return /^[COH]/.test(str_formuleSemi.slice(-2));  
     }
- }
+  }
+}
+
+/**
+ * testPremietElement()
+ * Date : 23.02.2022
+ * Dernière modification : Michael Divia
+ * Permet de vérifier que le premier charactère est bien une lettre
+ */
+ function testPremierElement()
+{
+  return /^[COH]/.test(str_formuleSemi.slice(0));  
+}
