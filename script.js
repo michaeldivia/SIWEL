@@ -1,4 +1,3 @@
-
 //Variable avec les éléments principaux à tester
 var elementsPrincipaux = ["C","H","O"];
 
@@ -15,18 +14,28 @@ var hValue=1;
 var oValue = 2;
 
 var counterEmplacement = 0;
+
 /*
   [0] = Centre
-  [1] = Gauche
-  [2] = Haut
-  [3] = Bas
-  [4] = Droite
+  [1] = Nombre de liaisons à gauche
+  [2] = Gauche
+  [3] = Nombre de liaisons en haut
+  [4] = Haut
+  [5] = Nombre de liaisons en bas
+  [6] = Bas
+  [7] = Nombre de liaisons à droite
+  [8] = Droite
 */
+
+//Création des variables pour réaliser la formule de Lewis
 let emplacements = ["","","","","","","","",""];
-arryTotalEmplacements = [];
+arrayTotalEmplacements = [];
 var regleOctet = 0;
 var valeurRestante = 0;
 var liaison = false;
+var erreurDansLiaison = false;
+var sommeElements = 0;
+var dernierElement = false;
 
 /**
  * conversionFormuleSemiDeveloppee()
@@ -61,8 +70,10 @@ function conversionFormuleSemiDeveloppee()
   array_formule.forEach((element) => {
 
     var formula = "";
+    var counterElement = 0;
     //Récupère les lettres des atomes ainsi que les numéros
     var arrayElements = element.split("");
+
     arrayElements[arrayElements.length] = "-";
 
     arrayElements.forEach((element) => {
@@ -74,6 +85,12 @@ function conversionFormuleSemiDeveloppee()
 
         //Récupère le nombre de fois que celle-ci doît être répétée
         var numberedFormula = letterToRepeat.repeat(element-1);
+
+        //Récupère le nombre de célibataires de l'Élement
+        valeurAAdditionner = nombreCelibatairesElement(letterToRepeat);
+
+        //Ajoute la valeur du nombre de célibataires mulitplié par le nombre de fois qu'il apparaît dans la formule
+        sommeElements+= valeurAAdditionner*element;
 
         //Rajoute l'élément répétée dans la formule
         completedFormula+=numberedFormula;
@@ -90,10 +107,30 @@ function conversionFormuleSemiDeveloppee()
         completedFormula+=element;
         formula +=element;
 
+        //Récupère la prochaine valeur du tableau 
+        var nextvalue = arrayElements[counterElement+1]
+
+        //Si la prochaine valeur n'est pas un nombre
+        if(!nextvalue.match(/\d+/g))
+        {
+          //Récupère le nombre de célibataires de l'Élement
+          valeurAAdditionner = nombreCelibatairesElement(element);
+
+          //Additionne la valeur du nombre de celibataires au total
+          sommeElements+= valeurAAdditionner;
+        }
+        
       }
+      counterElement++;
     })
   });
 
+  //Si la somme des celibataires n'est pas un nombre paire
+  if(sommeElements %2!=0)
+  {
+    alert("Formule fausse");
+    return;
+  }
 
   //Exécute la fonction formuleBrute()
   formuleBrute(completedFormula);
@@ -108,12 +145,22 @@ function conversionFormuleSemiDeveloppee()
   formuleBruteFinale="";
 }
 
-
+/**
+ * formuleLewis()
+ * Date : 23.02.2022
+ * Dernière modification : Esteban Lopez
+ * Permet de créer la formule de Lewis et mettre la position des elements dans un tableau 
+ */
 function formuleLewis(formuleSemiDeveloppeeConvertie)
 {
-  
-
-  console.log(formuleSemiDeveloppeeConvertie);
+  //Réinitialisation des variables
+  emplacements = ["","","","","","","","",""];
+  arrayTotalEmplacements = [];
+  regleOctet = 0;
+  valeurRestante = 0;
+  liaison = false;
+  erreurDansLiaison = false;
+  dernierElement = false;
 
   if(formuleSemiDeveloppeeConvertie.includes("-"))
   { 
@@ -129,8 +176,7 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
 
       parcourirElements(elementsAPlacer);
       
-    
-      arryTotalEmplacements.push(emplacements);
+      arrayTotalEmplacements.push(emplacements);
 
       counterEmplacement = 0;
       if(regleOctet>0)
@@ -138,7 +184,11 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
         valeurRestante = regleOctet;
         regleOctet = 0;
         liaison = true;
-        
+      }
+
+      if(erreurDansLiaison)
+      {
+        return;
       }
   });
     
@@ -148,10 +198,17 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
     var elementsAPlacer = formuleSemiDeveloppeeConvertie.split("");
 
     parcourirElements(elementsAPlacer);
-    arryTotalEmplacements.push(emplacements);
+    arrayTotalEmplacements.push(emplacements);
   }
 
-  console.log(arryTotalEmplacements);
+  if(erreurDansLiaison && !dernierElement)
+  {
+    arrayTotalEmplacements=[];
+  }
+  else
+  {
+    console.log(arrayTotalEmplacements);
+  }
 
 }
 
@@ -159,14 +216,27 @@ function parcourirElements(elementsFormule)
 {
   emplacements = ["","","","","","","","",""];
   
+  if(erreurDansLiaison)
+  {
+    console.log("Erreur dans liaison");
+    dernierElement = false;
+    return;
+  }
 
   elementsFormule.forEach((elementChimique) => 
   {
     var valeurASoustraire = 0;
-    console.log(elementChimique);
+
+    if(erreurDansLiaison)
+    {
+      
+      return;
+    }
 
     if(counterEmplacement == 1 && liaison == true)
     {
+      emplacements[counterEmplacement] = valeurRestante;
+      valeurRestante=0;
       counterEmplacement+=2;
       liaison = false;
     }
@@ -177,22 +247,22 @@ function parcourirElements(elementsFormule)
       case "C":
         if(regleOctet!=0)
         {
-          valeurASoustraire = cValue;
+          valeurASoustraire = CValue;
         }
         else
         {
-          regleOctet = cValue;
+          regleOctet = CValue;
         }
         break;
 
       case "O":
         if(regleOctet!=0)
         {
-          valeurASoustraire = oValue;
+          valeurASoustraire = OValue;
         }
         else
         {
-          regleOctet = oValue;
+          regleOctet = OValue;
         }
 
         break;
@@ -200,11 +270,11 @@ function parcourirElements(elementsFormule)
       case "H":
         if(regleOctet!=0)
         {
-          valeurASoustraire = hValue;
+          valeurASoustraire = HValue;
         }
         else
         {
-          regleOctet = hValue;
+          regleOctet = HValue;
         }
         break;
     }
@@ -212,7 +282,7 @@ function parcourirElements(elementsFormule)
     if(valeurRestante != 0)
     {
       regleOctet = regleOctet-valeurRestante;
-      valeurRestante=0;
+      
     }
 
 
@@ -238,7 +308,7 @@ function parcourirElements(elementsFormule)
           regleOctet=valeurElement-regleOctet;
           emplacements[counterEmplacement] = valeurASoustraire;
           emplacements[counterEmplacement+1] = elementChimique;
-          arryTotalEmplacements.push(emplacements);
+          arrayTotalEmplacements.push(emplacements);
           emplacements = ["","","","","","","","",""];
           liaison = true;
           counterEmplacement = 0;
@@ -249,7 +319,12 @@ function parcourirElements(elementsFormule)
         if(regleOctet-valeurASoustraire == 0 && counterEmplacement!= 0)
         {
           emplacements[emplacements.length-2] = valeurASoustraire; 
-          emplacements[emplacements.length-1] = elementChimique; 
+          emplacements[emplacements.length-1] = elementChimique;
+
+          erreurDansLiaison = true;
+          dernierElement = true;
+          
+          
         }
         else if(!liaison)
         {
@@ -271,6 +346,20 @@ function parcourirElements(elementsFormule)
     
   });
 }
+
+function nombreCelibatairesElement(elementChimique)
+{
+  switch(elementChimique)
+  {
+    case "O":
+      return oValue;
+    case "C":
+      return ccValue;
+    case "H":
+      return hValue;
+  }
+}
+
 /**
  * formuleBrute()
  * Date : 04.02.2022
