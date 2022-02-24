@@ -354,7 +354,7 @@ function nombreCelibatairesElement(elementChimique)
     case "O":
       return oValue;
     case "C":
-      return ccValue;
+      return cValue;
     case "H":
       return hValue;
   }
