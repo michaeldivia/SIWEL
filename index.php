@@ -70,6 +70,8 @@
 						Formule développée de Lewis : <span id="spanFormuleLewis"></span>
 					</p>
 				</div>
+				<div id="Lewis">
+				</div>
 				<footer id="footer">
 					<div class="inner">
 						<p>Crée par Michael Divià, Hugo Germano, Esteban Lopez et Henok Sese</p>
