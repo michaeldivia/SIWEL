@@ -65,6 +65,7 @@ function conversionFormuleSemiDeveloppee()
   //Variable qui récupérera la formule au complet
   var completedFormula = "";
   var formuleAvecTirets = "";
+  var sommeElements = 0;
 
   //Parcourt chaque ensemble d'éléments séparé
   array_formule.forEach((element) => {
