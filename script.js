@@ -129,7 +129,7 @@ function conversionFormuleSemiDeveloppee()
   //Si la somme des celibataires n'est pas un nombre paire
   if(sommeElements %2!=0)
   {
-    alert("Formule fausse");
+    document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className + " has-error";
     return;
   }
 
@@ -137,9 +137,6 @@ function conversionFormuleSemiDeveloppee()
   formuleBrute(completedFormula);
   formuleAvecTirets = formuleAvecTirets.slice(0,-1);
   formuleLewis(formuleAvecTirets);
-
-
-  //document.location.href="formuleDeveloppee.php?formuleInscrite="+completedFormula;
 
   //Réinitialisation des variables avec les formules
   completedFormula="";
@@ -209,6 +206,7 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
   else
   {
     console.log(arrayTotalEmplacements);
+    dessinercestgagner();
   }
 
 }
@@ -219,7 +217,7 @@ function parcourirElements(elementsFormule)
   
   if(erreurDansLiaison)
   {
-    console.log("Erreur dans liaison");
+    document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className + " has-error";
     dernierElement = false;
     return;
   }
@@ -301,7 +299,7 @@ function parcourirElements(elementsFormule)
         if(regleOctet-valeurASoustraire < 0)
         {
           console.log("wtf");
-          
+          document.getElementById("inputFormuleSemi").className = document.getElementById("inputFormuleSemi").className + " has-error";
           //Impossible normalement
         }
         else
@@ -436,7 +434,18 @@ function testDernierElement()
  * Dernière modification : Michael Divia
  * Permet de vérifier que le premier charactère est bien une lettre
  */
- function testPremierElement()
+function testPremierElement()
 {
   return /^[COH]/.test(str_formuleSemi.slice(0));  
+}
+
+/**
+ * dessinercestgagner()
+ * Date : 24.02.2022
+ * Dernière modification : Michael Divia
+ * Permet de dessiner la formule de LEWIS
+ */
+function dessinercestgagner()
+{
+  alert("ICI");
 }
