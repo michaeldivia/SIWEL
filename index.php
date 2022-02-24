@@ -52,7 +52,7 @@
 
 				<div class="input-group" id="inputFormuleSemi">
 					<span class="input-group-addon" id="spanSemDeveloppee">Formule Semi-developpée</span>
-					<input type="text" placeholder="CH3-O2C" value="" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)conversionFormuleSemiDeveloppee()">
+					<input type="text" placeholder="CH3-CO2H" value="" class="form-control" aria-describedby="case pour la formule semi-développée" id="atomsToDecompose" onkeypress="if(window.event.keyCode==13)conversionFormuleSemiDeveloppee()">
 				</div>
 
 				<div class="submit_button_div">
