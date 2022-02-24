@@ -247,22 +247,22 @@ function parcourirElements(elementsFormule)
       case "C":
         if(regleOctet!=0)
         {
-          valeurASoustraire = CValue;
+          valeurASoustraire = cValue;
         }
         else
         {
-          regleOctet = CValue;
+          regleOctet = cValue;
         }
         break;
 
       case "O":
         if(regleOctet!=0)
         {
-          valeurASoustraire = OValue;
+          valeurASoustraire = oValue;
         }
         else
         {
-          regleOctet = OValue;
+          regleOctet = oValue;
         }
 
         break;
@@ -270,11 +270,11 @@ function parcourirElements(elementsFormule)
       case "H":
         if(regleOctet!=0)
         {
-          valeurASoustraire = HValue;
+          valeurASoustraire = hValue;
         }
         else
         {
-          regleOctet = HValue;
+          regleOctet = hValue;
         }
         break;
     }
