@@ -16,6 +16,13 @@ var oValue = 2;
 var counterEmplacement = 0;
 
 /*
+
+Table des éléments = array_elements
+Table des fonctions organique = array_fonction_organique
+
+*/
+
+/*
   [0] = Centre
   [1] = Nombre de liaisons à gauche
   [2] = Gauche
@@ -447,5 +454,391 @@ function testPremierElement()
  */
 function dessinercestgagner()
 {
-  alert("ICI");
+  const myNode = document.getElementById("Lewis");
+  myNode.innerHTML = '';
+
+  var node = document.createElement("div");
+  node.classList.add('table_row');
+  node.setAttribute('id', 'row_1');
+  document.getElementById("Lewis").appendChild(node);
+
+  for(i=0;i<2;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_1").appendChild(node);
+  }
+
+  for(i=0;i<arrayTotalEmplacements.length;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+    var newContent = document.createTextNode(arrayTotalEmplacements[i][4]);
+
+    var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][4]));
+
+    if(row != -1)
+    {
+      switch(array_elements[row][3])
+      {
+      case "1":
+        node.classList.add('left');
+        break;
+      case "2":
+        node.classList.add('left_and_right');
+        break;
+      }
+    }
+
+    node.appendChild(newContent)
+    document.getElementById("row_1").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_1").appendChild(node);
+  }
+
+  var node = document.createElement("div");
+  node.classList.add('block');
+  document.getElementById("row_1").appendChild(node);
+
+  var node = document.createElement("div");
+  node.classList.add('table_row');
+  node.setAttribute('id', 'row_2');
+  document.getElementById("Lewis").appendChild(node);
+
+  for(i=0;i<2;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_2").appendChild(node);
+  }
+
+  for(i=0;i<arrayTotalEmplacements.length;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+
+    switch(arrayTotalEmplacements[i][3])
+    {
+      case 1:
+        node.classList.add('V1');
+        break;
+      case 2:
+        node.classList.add('V2');
+        break;
+      case 3:
+        node.classList.add('V3');
+        break;
+      case 4:
+        node.classList.add('V4');
+        break;
+    }
+
+    document.getElementById("row_2").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_2").appendChild(node);
+  }
+
+  var node = document.createElement("div");
+  node.classList.add('block');
+  document.getElementById("row_2").appendChild(node);
+
+  var node = document.createElement("div");
+  node.classList.add('table_row');
+  node.setAttribute('id', 'row_3');
+  document.getElementById("Lewis").appendChild(node);
+
+  for(i=0;i<arrayTotalEmplacements.length;i++)
+  {
+    for(x=0;x<9;x++)
+    {
+      if(x<3 || x>6)
+      {
+        if(i==0)
+        {
+          if(arrayTotalEmplacements[i][2] == "")
+          {
+            for(i=0;i<2;i++)
+            {
+              var node = document.createElement("div");
+              node.classList.add('block');
+              document.getElementById("row_3").appendChild(node);
+            }
+          }
+          else
+          {
+            switch(x)
+            {
+              case 0:
+                var node = document.createElement("div");
+                node.classList.add('block');
+                var newContent = document.createTextNode(arrayTotalEmplacements[i][x+2]);
+                node.appendChild(newContent)
+                var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x+2]));
+
+                if(row != -1)
+                {
+                  switch(array_elements[row][3])
+                  {
+                  case "1":
+                    node.classList.add('top');
+                    break;
+                  case "2":
+                    node.classList.add('top_and_bottom');
+                    break;
+                  }
+                }
+                document.getElementById("row_3").appendChild(node);
+                break;
+              case 1:
+                var node = document.createElement("div");
+                node.classList.add('block');
+                switch(arrayTotalEmplacements[i][x])
+                {
+                  case 1:
+                    node.classList.add('H1');
+                    break;
+                  case 2:
+                    node.classList.add('H2');
+                    break;
+                  case 3:
+                    node.classList.add('H3');
+                    break;
+                  case 4:
+                    node.classList.add('H4');
+                    break;
+                }
+                document.getElementById("row_3").appendChild(node);
+                break;
+              case 2:
+                var node = document.createElement("div");
+                node.classList.add('block');
+                var newContent = document.createTextNode(arrayTotalEmplacements[i][x-2]);
+
+                var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x-2]));
+
+                if(row != -1)
+                {
+                  switch(array_elements[row][3])
+                  {
+                  case "1":
+                    node.classList.add('left');
+                    break;
+                  case "2":
+                    node.classList.add('left_and_right');
+                    break;
+                  }
+                }
+
+                node.appendChild(newContent)
+                document.getElementById("row_3").appendChild(node);
+                break;
+            }
+          }
+        }
+        else
+        {
+          switch(x)
+          {
+            case 0:
+              var node = document.createElement("div");
+              node.classList.add('block');
+              switch(arrayTotalEmplacements[i][x+1])
+              {
+                case 1:
+                  node.classList.add('H1');
+                  break;
+                case 2:
+                  node.classList.add('H2');
+                  break;
+                case 3:
+                  node.classList.add('H3');
+                  break;
+                case 4:
+                  node.classList.add('H4');
+                  break;
+              }
+              document.getElementById("row_3").appendChild(node);
+              break;
+            case 1:
+              var node = document.createElement("div");
+              node.classList.add('block');
+              var newContent = document.createTextNode(arrayTotalEmplacements[i][x-1]);
+
+              var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x-1]));
+
+              if(row != -1)
+              {
+                switch(array_elements[row][3])
+                {
+                case "1":
+                  node.classList.add('left');
+                  break;
+                case "2":
+                  node.classList.add('top_and_bottom');
+                  break;
+                }
+              }
+
+              node.appendChild(newContent)
+              document.getElementById("row_3").appendChild(node);
+              break;
+          }
+        }
+        if(i+1 == arrayTotalEmplacements.length && x>6)
+        {
+          if(arrayTotalEmplacements[i][x] == "")
+          {
+            for(i=0;i<2;i++)
+            {
+              var node = document.createElement("div");
+              node.classList.add('block');
+              document.getElementById("row_3").appendChild(node);
+            }
+          }
+          else
+          {
+            if(x==7)
+            {
+              var node = document.createElement("div");
+              node.classList.add('block');
+              switch(arrayTotalEmplacements[i][x])
+              {
+                case 1:
+                  node.classList.add('H1');
+                  break;
+                case 2:
+                  node.classList.add('H2');
+                  break;
+                case 3:
+                  node.classList.add('H3');
+                  break;
+                case 4:
+                  node.classList.add('H4');
+                  break;
+              }
+              document.getElementById("row_3").appendChild(node);
+            }
+            else if(x==8)
+            {
+              var node = document.createElement("div");
+              node.classList.add('block');
+              var newContent = document.createTextNode(arrayTotalEmplacements[i][x]);
+
+              var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x]));
+
+              if(row != -1)
+              {
+                switch(array_elements[row][3])
+                {
+                case "1":
+                  node.classList.add('right');
+                  break;
+                case "2":
+                  node.classList.add('top_and_bottom');
+                  break;
+                }
+              }
+
+              node.appendChild(newContent)
+              document.getElementById("row_3").appendChild(node);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  var node = document.createElement("div");
+  node.classList.add('table_row');
+  node.setAttribute('id', 'row_4');
+  document.getElementById("Lewis").appendChild(node);
+
+  for(i=0;i<2;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_4").appendChild(node);
+  }
+
+  for(i=0;i<arrayTotalEmplacements.length;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+
+    switch(arrayTotalEmplacements[i][5])
+    {
+      case 1:
+        node.classList.add('V1');
+        break;
+      case 2:
+        node.classList.add('V2');
+        break;
+      case 3:
+        node.classList.add('V3');
+        break;
+      case 4:
+        node.classList.add('V4');
+        break;
+    }
+
+    document.getElementById("row_4").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_4").appendChild(node);
+  }
+
+  var node = document.createElement("div");
+  node.classList.add('block');
+  document.getElementById("row_4").appendChild(node);
+
+  var node = document.createElement("div");
+  node.classList.add('table_row');
+  node.setAttribute('id', 'row_5');
+  document.getElementById("Lewis").appendChild(node);
+
+  for(i=0;i<2;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_5").appendChild(node);
+  }
+
+  for(i=0;i<arrayTotalEmplacements.length;i++)
+  {
+    var node = document.createElement("div");
+    node.classList.add('block');
+    var newContent = document.createTextNode(arrayTotalEmplacements[i][6]);
+
+    var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][6]));
+
+    if(row != -1)
+    {
+      switch(array_elements[row][3])
+      {
+      case "1":
+        node.classList.add('left');
+        break;
+      case "2":
+        node.classList.add('left_and_right');
+        break;
+      }
+    }
+
+    node.appendChild(newContent)
+    document.getElementById("row_5").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_5").appendChild(node);
+  }
+
+  var node = document.createElement("div");
+  node.classList.add('block');
+  document.getElementById("row_5").appendChild(node);
+
 }
