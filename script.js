@@ -15,6 +15,7 @@ var oValue = 2;
 
 var counterEmplacement = 0;
 
+
 /*
 
 Table des éléments = array_elements
@@ -249,42 +250,15 @@ function parcourirElements(elementsFormule)
     }
 
 
-    switch(elementChimique)
+    if(regleOctet!=0)
     {
-      case "C":
-        if(regleOctet!=0)
-        {
-          valeurASoustraire = cValue;
-        }
-        else
-        {
-          regleOctet = cValue;
-        }
-        break;
-
-      case "O":
-        if(regleOctet!=0)
-        {
-          valeurASoustraire = oValue;
-        }
-        else
-        {
-          regleOctet = oValue;
-        }
-
-        break;
-      
-      case "H":
-        if(regleOctet!=0)
-        {
-          valeurASoustraire = hValue;
-        }
-        else
-        {
-          regleOctet = hValue;
-        }
-        break;
+      valeurASoustraire = nombreCelibatairesElement(elementChimique);
     }
+    else
+    {
+      regleOctet = nombreCelibatairesElement(elementChimique);
+    }
+    
 
     if(valeurRestante != 0)
     {
@@ -356,15 +330,19 @@ function parcourirElements(elementsFormule)
 
 function nombreCelibatairesElement(elementChimique)
 {
-  switch(elementChimique)
-  {
-    case "O":
-      return oValue;
-    case "C":
-      return cValue;
-    case "H":
-      return hValue;
-  }
+
+  array_elements.forEach((element) => {
+
+    
+    if(elementChimique==element[1])
+    {
+      valueOfElement = parseInt(element[2]);
+
+      
+    }
+  });
+
+  return valueOfElement;
 }
 
 /**
