@@ -166,6 +166,7 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
   liaison = false;
   erreurDansLiaison = false;
   dernierElement = false;
+  counterEmplacement = 0;
 
   if(formuleSemiDeveloppeeConvertie.includes("-"))
   { 
