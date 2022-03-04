@@ -462,7 +462,7 @@ function dessinercestgagner()
   node.setAttribute('id', 'row_1');
   document.getElementById("Lewis").appendChild(node);
 
-  for(i=0;i<2;i++)
+  for(z=0;z<2;z++)
   {
     var node = document.createElement("div");
     node.classList.add('block');
@@ -477,7 +477,7 @@ function dessinercestgagner()
 
     var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][4]));
 
-    if(row != -1)
+    if(row !== -1)
     {
       switch(array_elements[row][3])
       {
@@ -507,7 +507,7 @@ function dessinercestgagner()
   node.setAttribute('id', 'row_2');
   document.getElementById("Lewis").appendChild(node);
 
-  for(i=0;i<2;i++)
+  for(z=0;z<2;z++)
   {
     var node = document.createElement("div");
     node.classList.add('block');
@@ -551,21 +551,163 @@ function dessinercestgagner()
   node.setAttribute('id', 'row_3');
   document.getElementById("Lewis").appendChild(node);
 
-  for(i=0;i<arrayTotalEmplacements.length;i++)
+  if(arrayTotalEmplacements.length == 1 && arrayTotalEmplacements[0][2] == "" && arrayTotalEmplacements[0][3] == "" && arrayTotalEmplacements[0][4] == "" && arrayTotalEmplacements[0][5] == "" && arrayTotalEmplacements[0][6] == "")
   {
-    for(x=0;x<9;x++)
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_3").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    var newContent = document.createTextNode(arrayTotalEmplacements[0][0]);
+    node.appendChild(newContent)
+    var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[0][0]));
+
+    if(row !== -1)
     {
-      if(x<3 || x>6)
+      switch(array_elements[row][3])
       {
-        if(i==0)
+      case "1":
+        node.classList.add('top');
+        break;
+      case "2":
+        node.classList.add('top_and_bottom');
+        break;
+      }
+    }
+    document.getElementById("row_3").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    switch(arrayTotalEmplacements[0][7])
+    {
+      case 1:
+        node.classList.add('H1');
+        break;
+      case 2:
+        node.classList.add('H2');
+        break;
+      case 3:
+        node.classList.add('H3');
+        break;
+      case 4:
+        node.classList.add('H4');
+        break;
+    }
+    document.getElementById("row_3").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    var newContent = document.createTextNode(arrayTotalEmplacements[0][8]);
+    node.appendChild(newContent)
+    var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[0][8]));
+
+    if(row !== -1)
+    {
+      switch(array_elements[row][3])
+      {
+      case "1":
+        node.classList.add('top');
+        break;
+      case "2":
+        node.classList.add('top_and_bottom');
+        break;
+      }
+    }
+    document.getElementById("row_3").appendChild(node);
+
+    var node = document.createElement("div");
+    node.classList.add('block');
+    document.getElementById("row_3").appendChild(node);
+  }
+  else
+  {
+    for(i=0;i<arrayTotalEmplacements.length;i++)
+    {
+      for(x=0;x<9;x++)
+      {
+        if(x<3 || x>6)
         {
-          if(arrayTotalEmplacements[i][2] == "")
+          if(i==0)
           {
-            for(i=0;i<2;i++)
+            if(arrayTotalEmplacements[i][2] == "")
             {
-              var node = document.createElement("div");
-              node.classList.add('block');
-              document.getElementById("row_3").appendChild(node);
+              for(z=0;z<2;z++)
+              {
+                var node = document.createElement("div");
+                node.classList.add('block');
+                document.getElementById("row_3").appendChild(node);
+              }
+            }
+            else
+            {
+              switch(x)
+              {
+                case 0:
+                  var node = document.createElement("div");
+                  node.classList.add('block');
+                  var newContent = document.createTextNode(arrayTotalEmplacements[i][x+2]);
+                  node.appendChild(newContent)
+                  var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x+2]));
+
+                  if(row != -1)
+                  {
+                    switch(array_elements[row][3])
+                    {
+                    case "1":
+                      node.classList.add('top');
+                      break;
+                    case "2":
+                      node.classList.add('top_and_bottom');
+                      break;
+                    }
+                  }
+                  document.getElementById("row_3").appendChild(node);
+                  break;
+                case 1:
+                  var node = document.createElement("div");
+                  node.classList.add('block');
+                  switch(arrayTotalEmplacements[i][x])
+                  {
+                    case 1:
+                      node.classList.add('H1');
+                      break;
+                    case 2:
+                      node.classList.add('H2');
+                      break;
+                    case 3:
+                      node.classList.add('H3');
+                      break;
+                    case 4:
+                      node.classList.add('H4');
+                      break;
+                  }
+                  document.getElementById("row_3").appendChild(node);
+                  break;
+                case 2:
+                  var node = document.createElement("div");
+                  node.classList.add('block');
+                  var newContent = document.createTextNode(arrayTotalEmplacements[i][x-2]);
+
+                  var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x-2]));
+
+                  if(row != -1)
+                  {
+                    switch(array_elements[row][3])
+                    {
+                    case "1":
+                      node.classList.add('left');
+                      break;
+                    case "2":
+                      node.classList.add('top_and_bottom');
+                      break;
+                    }
+                  }
+
+                  node.appendChild(newContent)
+                  document.getElementById("row_3").appendChild(node);
+                  break;
+              }
             }
           }
           else
@@ -575,25 +717,63 @@ function dessinercestgagner()
               case 0:
                 var node = document.createElement("div");
                 node.classList.add('block');
-                var newContent = document.createTextNode(arrayTotalEmplacements[i][x+2]);
-                node.appendChild(newContent)
-                var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x+2]));
+                switch(arrayTotalEmplacements[i][x+1])
+                {
+                  case 1:
+                    node.classList.add('H1');
+                    break;
+                  case 2:
+                    node.classList.add('H2');
+                    break;
+                  case 3:
+                    node.classList.add('H3');
+                    break;
+                  case 4:
+                    node.classList.add('H4');
+                    break;
+                }
+                document.getElementById("row_3").appendChild(node);
+                break;
+              case 1:
+                var node = document.createElement("div");
+                node.classList.add('block');
+                var newContent = document.createTextNode(arrayTotalEmplacements[i][x-1]);
 
-                if(row != -1)
+                var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x-1]));
+
+                if(row !== -1)
                 {
                   switch(array_elements[row][3])
                   {
                   case "1":
-                    node.classList.add('top');
+                    node.classList.add('left');
                     break;
                   case "2":
                     node.classList.add('top_and_bottom');
                     break;
                   }
                 }
+
+                node.appendChild(newContent)
                 document.getElementById("row_3").appendChild(node);
                 break;
-              case 1:
+            }
+          }
+          if(i+1 == arrayTotalEmplacements.length && x>6)
+          {
+            if(arrayTotalEmplacements[i][x] == "")
+            {
+              for(z=0;z<2;z++)
+              {
+                var node = document.createElement("div");
+                node.classList.add('block');
+                document.getElementById("row_3").appendChild(node);
+              }
+            }
+            else
+            {
+              if(x==7)
+              {
                 var node = document.createElement("div");
                 node.classList.add('block');
                 switch(arrayTotalEmplacements[i][x])
@@ -612,139 +792,31 @@ function dessinercestgagner()
                     break;
                 }
                 document.getElementById("row_3").appendChild(node);
-                break;
-              case 2:
+              }
+              else if(x==8)
+              {
                 var node = document.createElement("div");
                 node.classList.add('block');
-                var newContent = document.createTextNode(arrayTotalEmplacements[i][x-2]);
+                var newContent = document.createTextNode(arrayTotalEmplacements[i][x]);
 
-                var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x-2]));
+                var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x]));
 
                 if(row != -1)
                 {
                   switch(array_elements[row][3])
                   {
                   case "1":
-                    node.classList.add('left');
+                    node.classList.add('right');
                     break;
                   case "2":
-                    node.classList.add('left_and_right');
+                    node.classList.add('top_and_bottom');
                     break;
                   }
                 }
 
                 node.appendChild(newContent)
                 document.getElementById("row_3").appendChild(node);
-                break;
-            }
-          }
-        }
-        else
-        {
-          switch(x)
-          {
-            case 0:
-              var node = document.createElement("div");
-              node.classList.add('block');
-              switch(arrayTotalEmplacements[i][x+1])
-              {
-                case 1:
-                  node.classList.add('H1');
-                  break;
-                case 2:
-                  node.classList.add('H2');
-                  break;
-                case 3:
-                  node.classList.add('H3');
-                  break;
-                case 4:
-                  node.classList.add('H4');
-                  break;
               }
-              document.getElementById("row_3").appendChild(node);
-              break;
-            case 1:
-              var node = document.createElement("div");
-              node.classList.add('block');
-              var newContent = document.createTextNode(arrayTotalEmplacements[i][x-1]);
-
-              var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x-1]));
-
-              if(row != -1)
-              {
-                switch(array_elements[row][3])
-                {
-                case "1":
-                  node.classList.add('left');
-                  break;
-                case "2":
-                  node.classList.add('top_and_bottom');
-                  break;
-                }
-              }
-
-              node.appendChild(newContent)
-              document.getElementById("row_3").appendChild(node);
-              break;
-          }
-        }
-        if(i+1 == arrayTotalEmplacements.length && x>6)
-        {
-          if(arrayTotalEmplacements[i][x] == "")
-          {
-            for(i=0;i<2;i++)
-            {
-              var node = document.createElement("div");
-              node.classList.add('block');
-              document.getElementById("row_3").appendChild(node);
-            }
-          }
-          else
-          {
-            if(x==7)
-            {
-              var node = document.createElement("div");
-              node.classList.add('block');
-              switch(arrayTotalEmplacements[i][x])
-              {
-                case 1:
-                  node.classList.add('H1');
-                  break;
-                case 2:
-                  node.classList.add('H2');
-                  break;
-                case 3:
-                  node.classList.add('H3');
-                  break;
-                case 4:
-                  node.classList.add('H4');
-                  break;
-              }
-              document.getElementById("row_3").appendChild(node);
-            }
-            else if(x==8)
-            {
-              var node = document.createElement("div");
-              node.classList.add('block');
-              var newContent = document.createTextNode(arrayTotalEmplacements[i][x]);
-
-              var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][x]));
-
-              if(row != -1)
-              {
-                switch(array_elements[row][3])
-                {
-                case "1":
-                  node.classList.add('right');
-                  break;
-                case "2":
-                  node.classList.add('top_and_bottom');
-                  break;
-                }
-              }
-
-              node.appendChild(newContent)
-              document.getElementById("row_3").appendChild(node);
             }
           }
         }
@@ -757,7 +829,7 @@ function dessinercestgagner()
   node.setAttribute('id', 'row_4');
   document.getElementById("Lewis").appendChild(node);
 
-  for(i=0;i<2;i++)
+  for(z=0;z<2;z++)
   {
     var node = document.createElement("div");
     node.classList.add('block');
@@ -801,7 +873,7 @@ function dessinercestgagner()
   node.setAttribute('id', 'row_5');
   document.getElementById("Lewis").appendChild(node);
 
-  for(i=0;i<2;i++)
+  for(z=0;z<2;z++)
   {
     var node = document.createElement("div");
     node.classList.add('block');
@@ -816,7 +888,7 @@ function dessinercestgagner()
 
     var row = array_elements.findIndex(row => row.includes(arrayTotalEmplacements[i][6]));
 
-    if(row != -1)
+    if(row !== -1)
     {
       switch(array_elements[row][3])
       {
