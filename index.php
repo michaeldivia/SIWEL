@@ -67,6 +67,10 @@
 					</p>
 
 					<p>
+						Fonction organique : <span id="spanFonctionOrganique"></span> 
+					</p>
+
+					<p>
 						Formule développée de Lewis : <span id="spanFormuleLewis"></span>
 					</p>
 				</div>

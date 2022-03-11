@@ -7,6 +7,9 @@ var regexTestElements = /^[COH0-9\-]+$/;
 //Variable qui contiendra la formule brute sans les nombres (avec les lettres répétées)
 var formuleBruteSansNombres="";
 
+//Variable qui contiendra la formule étendue avec tiret
+var formuleAvecTirets = "";
+
 //Variable qui contiendra la formule brute finale
 var formuleBruteFinale="";
 var cValue=4;
@@ -72,7 +75,7 @@ function conversionFormuleSemiDeveloppee()
 
   //Variable qui récupérera la formule au complet
   var completedFormula = "";
-  var formuleAvecTirets = "";
+  formuleAvecTirets = "";
   var sommeElements = 0;
 
   //Parcourt chaque ensemble d'éléments séparé
@@ -215,6 +218,7 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
   else
   {
     console.log(arrayTotalEmplacements);
+    identificationorganique();
     dessinercestgagner();
   }
 
@@ -432,6 +436,38 @@ function testDernierElement()
 function testPremierElement()
 {
   return /^[COH]/.test(str_formuleSemi.slice(0));  
+}
+
+/**
+ * identificationorganique()
+ * Date : 04.03.2022
+ * Dernière modification : Michael Divià
+ * Permet d'identifier des fonctions organiques
+ */
+function identificationorganique()
+{
+  document.getElementById("spanFonctionOrganique").innerHTML = "Aucune";
+
+  for(i=0;i<array_fonction_organique.length;i++)
+  {
+    var orga = array_fonction_organique[i][0];
+
+    if (new RegExp(orga.split("*").join("[A-Z]")).test(formuleAvecTirets) == true)
+    {
+      console.log("Fonction organique trouvée ! -> " + array_fonction_organique[i][1] + "(" + i + " // " + array_fonction_organique[i][0] + ")");
+      
+      if(document.getElementById("spanFonctionOrganique").textContent == "Aucune")
+      {
+        //Affiche la fonction organique sur la page
+        document.getElementById("spanFonctionOrganique").innerHTML = array_fonction_organique[i][1];
+      }
+      else
+      {
+        document.getElementById("spanFonctionOrganique").innerHTML = document.getElementById("spanFonctionOrganique").innerHTML + " + " + array_fonction_organique[i][1];
+      }
+      
+    }
+  }
 }
 
 /**
