@@ -248,6 +248,7 @@ function parcourirElements(elementsFormule)
       counterEmplacement+=2;
       liaison = false;
     }
+    
 
 
     if(regleOctet!=0)
@@ -322,6 +323,14 @@ function parcourirElements(elementsFormule)
     {
       emplacements[counterEmplacement] = elementChimique;
       counterEmplacement++;
+    }
+
+    //Permet de rajouter la liaison à gauche si le groupe ne possède qu'un élément chimique
+    if(elementsFormule.length <=1 && liaison==true)
+    {
+      emplacements[counterEmplacement] = valeurRestante;
+      valeurRestante = 0;
+      liaison = false;
     }
 
     
