@@ -15,6 +15,7 @@ var oValue = 2;
 
 var counterEmplacement = 0;
 
+
 /*
 
 Table des éléments = array_elements
@@ -166,6 +167,7 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
   liaison = false;
   erreurDansLiaison = false;
   dernierElement = false;
+  counterEmplacement = 0;
 
   if(formuleSemiDeveloppeeConvertie.includes("-"))
   { 
@@ -246,44 +248,18 @@ function parcourirElements(elementsFormule)
       counterEmplacement+=2;
       liaison = false;
     }
+    
 
 
-    switch(elementChimique)
+    if(regleOctet!=0)
     {
-      case "C":
-        if(regleOctet!=0)
-        {
-          valeurASoustraire = cValue;
-        }
-        else
-        {
-          regleOctet = cValue;
-        }
-        break;
-
-      case "O":
-        if(regleOctet!=0)
-        {
-          valeurASoustraire = oValue;
-        }
-        else
-        {
-          regleOctet = oValue;
-        }
-
-        break;
-      
-      case "H":
-        if(regleOctet!=0)
-        {
-          valeurASoustraire = hValue;
-        }
-        else
-        {
-          regleOctet = hValue;
-        }
-        break;
+      valeurASoustraire = nombreCelibatairesElement(elementChimique);
     }
+    else
+    {
+      regleOctet = nombreCelibatairesElement(elementChimique);
+    }
+    
 
     if(valeurRestante != 0)
     {
@@ -349,21 +325,33 @@ function parcourirElements(elementsFormule)
       counterEmplacement++;
     }
 
+    //Permet de rajouter la liaison à gauche si le groupe ne possède qu'un élément chimique
+    if(elementsFormule.length <=1 && liaison==true)
+    {
+      emplacements[counterEmplacement] = valeurRestante;
+      valeurRestante = 0;
+      liaison = false;
+    }
+
     
   });
 }
 
 function nombreCelibatairesElement(elementChimique)
 {
-  switch(elementChimique)
-  {
-    case "O":
-      return oValue;
-    case "C":
-      return cValue;
-    case "H":
-      return hValue;
-  }
+
+  array_elements.forEach((element) => {
+
+    
+    if(elementChimique==element[1])
+    {
+      valueOfElement = parseInt(element[2]);
+
+      
+    }
+  });
+
+  return valueOfElement;
 }
 
 /**
