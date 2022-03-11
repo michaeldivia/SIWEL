@@ -458,15 +458,26 @@ function testPremierElement()
  */
 function identificationorganique()
 {
-
-  var escapeRegex = (formuleAvecTirets) => formuleAvecTirets.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  document.getElementById("spanFonctionOrganique").innerHTML = "Aucune";
 
   for(i=0;i<array_fonction_organique.length;i++)
   {
     var orga = array_fonction_organique[i][0];
-    if (new RegExp("^" + orga.split("*").map(escapeRegex).join(".*") + "$").test(formuleAvecTirets) == true)
+
+    if (new RegExp(orga.split("*").join("[A-Z]")).test(formuleAvecTirets) == true)
     {
-      console.log("Fonction organique trouvée ! -> " + array_fonction_organique[i][1]);
+      console.log("Fonction organique trouvée ! -> " + array_fonction_organique[i][1] + "(" + i + " // " + array_fonction_organique[i][0] + ")");
+      
+      if(document.getElementById("spanFonctionOrganique").textContent == "Aucune")
+      {
+        //Affiche la fonction organique sur la page
+        document.getElementById("spanFonctionOrganique").innerHTML = array_fonction_organique[i][1];
+      }
+      else
+      {
+        document.getElementById("spanFonctionOrganique").innerHTML = document.getElementById("spanFonctionOrganique").innerHTML + " + " + array_fonction_organique[i][1];
+      }
+      
     }
   }
 }
