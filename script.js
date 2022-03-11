@@ -458,15 +458,16 @@ function testPremierElement()
  */
 function identificationorganique()
 {
-  //formuleAvecTirets
-  //array_fonction_organique
 
-
+  var escapeRegex = (formuleAvecTirets) => formuleAvecTirets.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 
   for(i=0;i<array_fonction_organique.length;i++)
   {
     var orga = array_fonction_organique[i][0];
-    console.log(orga);
+    if (new RegExp("^" + orga.split("*").map(escapeRegex).join(".*") + "$").test(formuleAvecTirets) == true)
+    {
+      console.log("Fonction organique trouvée ! -> " + array_fonction_organique[i][1]);
+    }
   }
 }
 
