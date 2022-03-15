@@ -176,6 +176,7 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
   { 
     array_formuleSemi = formuleSemiDeveloppeeConvertie.split("-");
 
+    array_formuleSemi = testSiElementPlusGrand(array_formuleSemi,true);
     
     //Parcourt chaque ensemble d'éléments séparé
     array_formuleSemi.forEach((groupeElementChimique) => 
@@ -205,7 +206,9 @@ function formuleLewis(formuleSemiDeveloppeeConvertie)
   }
   else
   {
-    var elementsAPlacer = formuleSemiDeveloppeeConvertie.split("");
+    elementsAPlacer = testSiElementPlusGrand(formuleSemiDeveloppeeConvertie,false);
+
+    var elementsAPlacer = elementsAPlacer.split("");
 
     parcourirElements(elementsAPlacer);
     arrayTotalEmplacements.push(emplacements);
@@ -292,6 +295,11 @@ function parcourirElements(elementsFormule)
         else
         {
           regleOctet=valeurElement-regleOctet;
+
+          /*
+          emplacements[emplacements.length-2] = valeurASoustraire; 
+          emplacements[emplacements.length-1] = elementChimique;
+          */
           emplacements[counterEmplacement] = valeurASoustraire;
           emplacements[counterEmplacement+1] = elementChimique;
           arrayTotalEmplacements.push(emplacements);
@@ -356,6 +364,72 @@ function nombreCelibatairesElement(elementChimique)
   });
 
   return valueOfElement;
+}
+
+function testSiElementPlusGrand(groupeElementsFormule, avecTirets)
+{
+  console.log(groupeElementsFormule);
+
+  if(avecTirets)
+  {
+    groupeElementsFormule.forEach((element) =>{
+      element = parcourtEtCompareLesElements(element)
+    });
+
+      
+  }
+  else
+  {
+    groupeElementsFormule = parcourtEtCompareLesElements(groupeElementsFormule);
+  }
+
+  
+
+  return groupeElementsFormule;
+}
+
+function parcourtEtCompareLesElements(elementsAcomparer)
+{
+  counterElement = 0;
+  nombreCelibataireMax = 0;
+  elementMax = "";
+  positonCelibataireMax = 0;
+  elementsAvantComparaison = [];
+  elementsEnOrdre = "";
+
+
+
+  for(;counterElement<elementsAcomparer.length;counterElement++)
+  {
+    elementChimique = elementsAcomparer[counterElement];
+    valeurElement = nombreCelibatairesElement(elementChimique);
+
+    elementsAvantComparaison.push(elementChimique);
+
+    if(valeurElement > nombreCelibataireMax)
+    {
+      
+      if(counterElement != 0)
+      {
+        elementsAvantComparaison[positonCelibataireMax] = elementChimique;
+        elementsAvantComparaison[counterElement] = elementMax;
+      }
+      
+
+      elementMax = elementChimique;
+      positonCelibataireMax = counterElement;
+      nombreCelibataireMax = valeurElement;
+
+    }
+  }
+
+  for(counter=0;counter<elementsAvantComparaison.length;counter++)
+  {
+    elementsEnOrdre+= elementsAvantComparaison[counter];
+  }
+
+
+  return elementsEnOrdre;
 }
 
 /**
