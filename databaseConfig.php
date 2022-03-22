@@ -16,10 +16,10 @@
     }
 
     //Acred de la Base de donnée
-    $host = "localhost";
-    $username = "siwel";
-    $password = "JeNAimePasLaMTU1C2021$";
-    $dbname = "SIWEL";
+    $host = "DBhost";
+    $username = "DBusername";
+    $password = "DBpassword";
+    $dbname = "DBname";
 
     //Créer la connexion à la Base de Donnée
     $conn = new mysqli($host, $username, $password, $dbname);
